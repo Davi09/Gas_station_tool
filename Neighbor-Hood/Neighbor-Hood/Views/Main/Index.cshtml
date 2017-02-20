@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Search</h2>
+@using (Html.BeginForm("Search", "Home"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2">Address</label>
+            <div class="col-md-10">
+                <input type="text" id="address" name="address">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Zip</label>
+            <div class="col-md-10">
+                <input type="text" id="zip" name="zip">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+        </div>
+}

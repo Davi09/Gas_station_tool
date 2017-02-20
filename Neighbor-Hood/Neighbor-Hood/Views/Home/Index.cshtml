@@ -1,0 +1,58 @@
+﻿@using (Html.BeginForm("Search", "Home"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2">Address</label>
+            <div class="col-md-10">
+                <input type="text" id="address" size="20" name="address">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">City</label>
+            <div class="col-md-10">
+                <input type="text" id="city" size="10" name="city">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">State</label>
+            @Html.DropDownList("state",
+                             ViewData["states"] as SelectList,
+                            "Please select",
+                            new { id = "state" })
+        </div>
+       
+        
+        <div class="form-group">
+            <label class="control-label col-md-2">Zip</label>
+            <div class="col-md-10">
+                <input type="text" id="zip" size="5" name="zip">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="search" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div id="checkboxes">
+
+        <div id="yelpCheck" class="sameline">
+            <!--Yelp-->
+            @Html.Partial("YelpPartial")
+        </div>
+        <div class="sameline">
+            <!--Sex Offender-->
+            @Html.Partial("SexOffenderPartial")
+
+        </div>
+    </div>
+    <div>
+        <input id="facebookAccessToken" value="" hidden/>
+        <input id="facebookUid" value="" hidden />
+    </div>
+    <!--The Google Map-->
+    @Html.Partial("GoogleMap")
+}

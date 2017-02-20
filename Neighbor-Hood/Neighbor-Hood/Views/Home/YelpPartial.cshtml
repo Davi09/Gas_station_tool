@@ -1,0 +1,32 @@
+﻿<h4>Yelp</h4>
+@using (Html.BeginForm("Search", "Home"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Restaurant</label>
+            <div class="col-md-10">
+                <input type="checkbox" name="restaurant" id="restaurant" value="restaurant">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Nightlife</label>
+            <div class="col-md-10">
+                <input type="checkbox" name="nightlife" id="nightlife" value="nightlife">
+            </div>
+        </div> 
+        <div class="form-group">
+            <label class="control-label col-md-2">Shopping</label>
+            <div class="col-md-10">
+                <input type="checkbox" name="shopping" id="shopping" value="Shopping">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">ActiveLife</label>
+            <div class="col-md-10">
+                <input type="checkbox" name="activelife" id="activelife" value="ActiveLife">
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,14 @@
+﻿<h4>Sex Offender</h4>
+@using (Html.BeginForm("Search", "Home"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">On/Off</label>
+            <div class="col-md-10">
+                <input type="checkbox" name="on" id="on" value="On">
+            </div>
+        </div>
+        
+    </div>
+}

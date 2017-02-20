@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title Neighbor-Hood</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA06f28rEyXPzdRTA2_EFcUp2wzM5BkbnE&sensor=false"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Neighbor-Hood", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <!--<li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>-->
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        @RenderSection("SPAViews", required: false)
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Neighbor-Hood</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/googlemap.js")
+    @Scripts.Render("~/Scripts/search.js")
+    @RenderSection("Scripts", required: false)
+
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '954712337876744', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true  // parse XFBML
+            });
+
+            // Additional initialization code here
+            FB.Event.subscribe('auth.authResponseChange', function (response) {
+                if (response.status === 'connected') {
+                    // the user is logged in and has authenticated your
+                    // app, and response.authResponse supplies
+                    // the user's ID, a valid access token, a signed
+                    // request, and the time the access token 
+                    // and signed request each expire
+                    var uid = response.authResponse.userID;
+                    var accessToken = response.authResponse.accessToken;
+
+                    // TODO: Handle the access token
+                    // Do a post to the server to finish the logon
+                    // This is a form post since we don't want to use AJAX
+                    /*var form = document.createElement("form");
+                    form.setAttribute("method", 'post');
+                    form.setAttribute("action", '/Home/UserInfo');
+
+                    var field = document.createElement("input");
+                    field.setAttribute("type", "hidden");
+                    field.setAttribute("name", 'accessToken');
+                    field.setAttribute("value", accessToken);
+                    form.appendChild(field);
+
+                    document.body.appendChild(form);
+                    form.submit();*/
+                    $("#facebookAccessToken").val(accessToken);
+                    $("#facebookUid").val(uid);
+
+
+                } else if (response.status === 'not_authorized') {
+                    // the user is logged in to Facebook, 
+                    // but has not authenticated your app
+                } else {
+                    // the user isn't logged in to Facebook.
+                }
+            });
+        };
+
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script'); js.id = id; js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+    </script>
+
+</body>
+</html>
